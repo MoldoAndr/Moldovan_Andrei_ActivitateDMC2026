@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Lab2</string>
+    <string name="btn_text">Schimba Textul</string>
+    <string name="tv_text">Text Initial</string>
+    <string name="et_hint">Introdu Text</string>
+    <string name="tv_changed">Text Modificat!</string>
+</resources>

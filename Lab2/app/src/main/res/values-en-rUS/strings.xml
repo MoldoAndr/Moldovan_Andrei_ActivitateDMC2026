@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Lab2</string>
+    <string name="btn_text">Change the text</string>
+    <string name="tv_text">Initial Text</string>
+    <string name="et_hint">Enter Text</string>
+    <string name="tv_changed">Text Modified!</string>
+</resources>
