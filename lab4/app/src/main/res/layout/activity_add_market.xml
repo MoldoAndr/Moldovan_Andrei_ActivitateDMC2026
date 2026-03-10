@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="40dp">
+
+        <TextView
+            android:id="@+id/tvFormTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/adaugare_market"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="40dp" />
+
+        <TextView
+            android:id="@+id/tvNumeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nume_market" />
+
+        <EditText
+            android:id="@+id/etNume"
+            android:hint="@string/ex_market_central"
+            android:inputType="textPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="@string/ex_market_central"
+            android:layout_marginBottom="20dp" />
+
+        <TextView
+            android:id="@+id/tvNrAngajatiLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/numar_angajati" />
+
+        <EditText
+            android:id="@+id/etNrAngajati"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="@string/ex_25"
+            android:inputType="number"
+            android:layout_marginBottom="20dp" />
+
+        <CheckBox
+            android:id="@+id/cbNonStop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/deschis_non_stop"
+            android:layout_marginBottom="20dp" />
+
+        <TextView
+            android:id="@+id/tvZonaLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Zona" />
+
+        <RadioGroup
+            android:id="@+id/rgZona"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp">
+
+            <RadioButton
+                android:id="@+id/rbUrban"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/urban" />
+
+            <RadioButton
+                android:id="@+id/rbRural"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rural"
+                android:layout_marginStart="20dp" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/tvTipLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tip_market" />
+
+        <Spinner
+            android:id="@+id/spinnerTip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp" />
+
+        <TextView
+            android:id="@+id/tvRatingLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rating" />
+
+        <Spinner
+            android:id="@+id/spinnerRating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp" />
+
+        <Switch
+            android:id="@+id/switchParcare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/are_parcare"
+            android:layout_marginBottom="40dp"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <ToggleButton
+            android:id="@+id/toggleLivrare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOn="@string/livrare_da"
+            android:textOff="@string/livrare_nu"
+            android:checked="true"
+            android:layout_marginBottom="40dp" />
+
+        <Button
+            android:id="@+id/btnSalveaza"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/salveaza_market" />
+
+    </LinearLayout>
+</ScrollView>

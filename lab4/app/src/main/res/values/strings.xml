@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Laborator 4</string>
+    <string name="aplicatie_market">Aplicatie Market</string>
+    <string name="adauga_market">Adauga Market</string>
+    <string name="date_market">Date market:</string>
+    <string name="nume">Nume: -</string>
+    <string name="tip">Tip: -</string>
+    <string name="zona">Zona: -</string>
+    <string name="livrare">Livrare: -</string>
+    <string name="parcare">Parcare: -</string>
+    <string name="rating">Rating: -</string>
+    <string name="non_stop">Non-stop: -</string>
+    <string name="nr_angajati">Nr. angajati: -</string>
+    <string name="adaugare_market">Adaugare Market</string>
+    <string name="nume_market">Nume market</string>
+    <string name="ex_market_central">Ex: Market Central</string>
+    <string name="numar_angajati">Numar angajati</string>
+    <string name="ex_25">25</string>
+    <string name="deschis_non_stop">Deschis non-stop</string>
+    <string name="Zona">Zona</string>
+    <string name="urban">Urban</string>
+    <string name="rural">Rural</string>
+    <string name="tip_market">Tip market</string>
+    <string name="Rating">Rating</string>
+    <string name="are_parcare">Are parcare</string>
+    <string name="livrare_da">Livrare: DA</string>
+    <string name="livrare_nu">Livrare: NU</string>
+    <string name="salveaza_market">Salveaza Market</string>
+    <string name="lista_marketuri">Lista marketuri:</string>
+</resources>
