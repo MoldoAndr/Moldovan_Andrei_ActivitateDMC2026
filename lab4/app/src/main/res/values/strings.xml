@@ -15,7 +15,7 @@
     <string name="nume_market">Nume market</string>
     <string name="ex_market_central">Ex: Market Central</string>
     <string name="numar_angajati">Numar angajati</string>
-    <string name="ex_25">25</string>
+    <integer name="ex_25">25</integer>
     <string name="deschis_non_stop">Deschis non-stop</string>
     <string name="Zona">Zona</string>
     <string name="urban">Urban</string>
@@ -27,4 +27,5 @@
     <string name="livrare_nu">Livrare: NU</string>
     <string name="salveaza_market">Salveaza Market</string>
     <string name="lista_marketuri">Lista marketuri:</string>
+    <string name="ora_inchiderii">Ora Inchiderii</string>
 </resources>

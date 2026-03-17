@@ -7,14 +7,13 @@ import android.content.Intent;
 import android.widget.Button;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_ADD_MARKET = 100;
-
-    private Button btnAdaugaMarket;
-    private ListView listViewMarkets;
 
     private ArrayList<Market> listaMarketuri;
     private ArrayList<String> listaAfisare;
@@ -25,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnAdaugaMarket = findViewById(R.id.btnAdaugaMarket);
-        listViewMarkets = findViewById(R.id.listViewMarkets);
+        Button btnAdaugaMarket = findViewById(R.id.btnAdaugaMarket);
+        ListView listViewMarkets = findViewById(R.id.listViewMarkets);
 
         listaMarketuri = new ArrayList<>();
         listaAfisare = new ArrayList<>();
@@ -38,6 +37,24 @@ public class MainActivity extends AppCompatActivity {
         );
 
         listViewMarkets.setAdapter(adapter);
+
+        listViewMarkets.setOnItemClickListener((parent, view, position, id) -> {
+            Market marketSelectat = listaMarketuri.get(position);
+            Toast.makeText(MainActivity.this,
+                    "Market selectat: " + marketSelectat.getNume(),
+                    Toast.LENGTH_LONG).show();
+        });
+
+        listViewMarkets.setOnItemLongClickListener((parent, view, position, id) -> {
+            listaMarketuri.remove(position);
+            listaAfisare.remove(position);
+            adapter.notifyDataSetChanged();
+            Toast.makeText(MainActivity.this,
+                    "Market sters",
+                    Toast.LENGTH_SHORT).show();
+            return true;
+        });
+
 
         btnAdaugaMarket.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, AddMarketActivity.class);
@@ -54,20 +71,9 @@ public class MainActivity extends AppCompatActivity {
 
             if (market != null) {
                 listaMarketuri.add(market);
-                listaAfisare.add(formatMarket(market));
+                listaAfisare.add(market.toString());
                 adapter.notifyDataSetChanged();
             }
         }
-    }
-
-    private String formatMarket(Market market) {
-        return    "Nume: " + market.getNume() +
-                "\nTip: " + market.getTip() +
-                "\nAngajati: " + market.getNrAngajati() +
-                "\nNon-stop: " + (market.isNonStop() ? "Da" : "Nu") +
-                "\nRating: " + market.getRating() +
-                "\nParcare: " + (market.isAreParcare() ? "Da" : "Nu") +
-                "\nLivrare: " + (market.isAreLivrare() ? "Da" : "Nu") +
-                "\nZona: " + market.getZona();
     }
 }

@@ -1,6 +1,13 @@
 package labs.mta.laborator4;
 
+import android.annotation.SuppressLint;
+import android.health.connect.LocalTimeRangeFilter;
+import android.provider.ContactsContract;
+
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
+import java.time.LocalTime;
 
 public class Market implements Serializable {
     private String nume;
@@ -11,12 +18,13 @@ public class Market implements Serializable {
     private boolean areParcare;
     private boolean areLivrare;
     private String zona;
+    private LocalTime localtime;
 
     public Market() {
     }
 
     public Market(String nume, boolean nonStop, int nrAngajati, TipMarket tip,
-                  float rating, boolean areParcare, boolean areLivrare, String zona) {
+                  float rating, boolean areParcare, boolean areLivrare, String zona, LocalTime local_time) {
         this.nume = nume;
         this.nonStop = nonStop;
         this.nrAngajati = nrAngajati;
@@ -25,6 +33,7 @@ public class Market implements Serializable {
         this.areParcare = areParcare;
         this.areLivrare = areLivrare;
         this.zona = zona;
+        this.localtime = local_time;
     }
 
     public String getNume() {
@@ -91,17 +100,28 @@ public class Market implements Serializable {
         this.zona = zona;
     }
 
+    @NonNull
     @Override
     public String toString() {
-        return "Market{" +
-                "nume='" + nume + '\'' +
-                ", nonStop=" + nonStop +
-                ", nrAngajati=" + nrAngajati +
-                ", tip=" + tip +
-                ", rating=" + rating +
-                ", areParcare=" + areParcare +
-                ", areLivrare=" + areLivrare +
-                ", zona='" + zona + '\'' +
-                '}';
+        return String.format(
+                "\n%-12s %s" +
+                        "\n%-12s %s" +
+                        "\n%-12s %s" +
+                        "\n%-12s %s" +
+                        "\n%-12s %s" +
+                        "\n%-12s %s" +
+                        "\n%-12s %s" +
+                        "\n%-12s %s" +
+                        "\n%-12s %s\n",
+                "nume=", nume,
+                "nonStop=", nonStop,
+                "nrAngajati=", nrAngajati,
+                "tip=", tip,
+                "rating=", rating,
+                "areParcare=", areParcare,
+                "areLivrare=", areLivrare,
+                "zona=", zona,
+                "oraInchidere=", String.format("%02d:%02d", localtime.getHour(), localtime.getMinute())
+        );
     }
 }

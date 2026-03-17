@@ -11,13 +11,16 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+import java.time.LocalTime;
 
 public class AddMarketActivity extends AppCompatActivity {
 
     private EditText etNume;
     private EditText etNrAngajati;
+    private TimePicker etTime;
     private CheckBox cbNonStop;
     private RadioButton rbUrban;
     private RadioButton rbRural;
@@ -31,7 +34,7 @@ public class AddMarketActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_market);
-
+        etTime = findViewById(R.id.timePicker);
         etNume = findViewById(R.id.etNume);
         etNrAngajati = findViewById(R.id.etNrAngajati);
         cbNonStop = findViewById(R.id.cbNonStop);
@@ -42,6 +45,11 @@ public class AddMarketActivity extends AppCompatActivity {
         switchParcare = findViewById(R.id.switchParcare);
         toggleLivrare = findViewById(R.id.toggleLivrare);
         btnSalveaza = findViewById(R.id.btnSalveaza);
+
+        LocalTime currentTime = LocalTime.now();
+        etTime.setIs24HourView(true);
+        etTime.setHour(currentTime.getHour());
+        etTime.setMinute(currentTime.getMinute());
 
         ArrayAdapter<TipMarket> adapterTip = new ArrayAdapter<>(
                 this,
@@ -71,7 +79,7 @@ public class AddMarketActivity extends AppCompatActivity {
     private void salveazaMarket() {
         String nume = etNume.getText().toString().trim();
         String nrAngajatiText = etNrAngajati.getText().toString().trim();
-
+        LocalTime time = LocalTime.of(etTime.getHour(), etTime.getMinute());
         if (nume.isEmpty()) {
             etNume.setError("Introduceți numele marketului");
             return;
@@ -86,7 +94,7 @@ public class AddMarketActivity extends AppCompatActivity {
         try {
             nrAngajati = Integer.parseInt(nrAngajatiText);
         } catch (NumberFormatException e) {
-            etNrAngajati.setError("Număr invalid");
+            etNrAngajati.setError("Numar invalid");
             return;
         }
 
@@ -114,7 +122,8 @@ public class AddMarketActivity extends AppCompatActivity {
                 rating,
                 areParcare,
                 areLivrare,
-                zona
+                zona,
+                time
         );
 
         Intent rezultat = new Intent();
