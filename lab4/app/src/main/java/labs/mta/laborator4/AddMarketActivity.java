@@ -14,9 +14,15 @@ import android.widget.Switch;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+
+import androidx.core.content.IntentCompat;
+
 import java.time.LocalTime;
 
 public class AddMarketActivity extends AppCompatActivity {
+
+    public static final String EXTRA_MARKET = "market";
+    public static final String EXTRA_POSITION = "position";
 
     private EditText etNume;
     private EditText etNrAngajati;
@@ -29,6 +35,8 @@ public class AddMarketActivity extends AppCompatActivity {
     private Switch switchParcare;
     private ToggleButton toggleLivrare;
     private Button btnSalveaza;
+    private Market marketPentruEditare;
+    private int pozitieEditare = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +53,7 @@ public class AddMarketActivity extends AppCompatActivity {
         switchParcare = findViewById(R.id.switchParcare);
         toggleLivrare = findViewById(R.id.toggleLivrare);
         btnSalveaza = findViewById(R.id.btnSalveaza);
-
-        LocalTime currentTime = LocalTime.now();
         etTime.setIs24HourView(true);
-        etTime.setHour(currentTime.getHour());
-        etTime.setMinute(currentTime.getMinute());
 
         ArrayAdapter<TipMarket> adapterTip = new ArrayAdapter<>(
                 this,
@@ -67,6 +71,7 @@ public class AddMarketActivity extends AppCompatActivity {
         );
         adapterRating.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRating.setAdapter(adapterRating);
+        incarcaDatePentruEditare();
 
         btnSalveaza.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,21 +119,56 @@ public class AddMarketActivity extends AppCompatActivity {
             return;
         }
 
-        Market market = new Market(
-                nume,
-                nonStop,
-                nrAngajati,
-                tip,
-                rating,
-                areParcare,
-                areLivrare,
-                zona,
-                time
-        );
+        Market market = marketPentruEditare == null ? new Market() : marketPentruEditare;
+        market.setNume(nume);
+        market.setNonStop(nonStop);
+        market.setNrAngajati(nrAngajati);
+        market.setTip(tip);
+        market.setRating(rating);
+        market.setAreParcare(areParcare);
+        market.setAreLivrare(areLivrare);
+        market.setZona(zona);
+        market.setLocaltime(time);
 
         Intent rezultat = new Intent();
-        rezultat.putExtra("market", market);
+        rezultat.putExtra(EXTRA_MARKET, market);
+        rezultat.putExtra(EXTRA_POSITION, pozitieEditare);
         setResult(RESULT_OK, rezultat);
         finish();
+    }
+
+    private void incarcaDatePentruEditare() {
+        pozitieEditare = getIntent().getIntExtra(EXTRA_POSITION, -1);
+        marketPentruEditare = IntentCompat.getParcelableExtra(getIntent(), EXTRA_MARKET, Market.class);
+
+        if (marketPentruEditare == null) {
+            LocalTime currentTime = LocalTime.now();
+            etTime.setHour(currentTime.getHour());
+            etTime.setMinute(currentTime.getMinute());
+            return;
+        }
+
+        etNume.setText(marketPentruEditare.getNume());
+        etNrAngajati.setText(String.valueOf(marketPentruEditare.getNrAngajati()));
+        cbNonStop.setChecked(marketPentruEditare.isNonStop());
+        spinnerTip.setSelection(marketPentruEditare.getTip().ordinal());
+
+        int ratingIndex = Math.max(0, Math.min(4, Math.round(marketPentruEditare.getRating()) - 1));
+        spinnerRating.setSelection(ratingIndex);
+
+        switchParcare.setChecked(marketPentruEditare.isAreParcare());
+        toggleLivrare.setChecked(marketPentruEditare.isAreLivrare());
+
+        if ("Urban".equalsIgnoreCase(marketPentruEditare.getZona())) {
+            rbUrban.setChecked(true);
+        } else if ("Rural".equalsIgnoreCase(marketPentruEditare.getZona())) {
+            rbRural.setChecked(true);
+        }
+
+        LocalTime time = marketPentruEditare.getLocaltime();
+        if (time != null) {
+            etTime.setHour(time.getHour());
+            etTime.setMinute(time.getMinute());
+        }
     }
 }
