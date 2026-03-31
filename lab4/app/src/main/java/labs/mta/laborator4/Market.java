@@ -153,6 +153,28 @@ public class Market implements Parcelable {
         dest.writeInt(localtime == null ? 0 : localtime.getMinute());
     }
 
+    public static Market fromFileLine(String line) {
+        String[] parts = line.split("\\|");
+        if (parts.length < 9) return null;
+        Market m = new Market();
+        m.setNume(parts[0]);
+        m.setNonStop(Boolean.parseBoolean(parts[1]));
+        m.setNrAngajati(Integer.parseInt(parts[2]));
+        m.setTip(TipMarket.valueOf(parts[3]));
+        m.setRating(Float.parseFloat(parts[4]));
+        m.setAreParcare(Boolean.parseBoolean(parts[5]));
+        m.setAreLivrare(Boolean.parseBoolean(parts[6]));
+        m.setZona(parts[7]);
+        String[] timeParts = parts[8].split(":");
+        m.setLocaltime(LocalTime.of(Integer.parseInt(timeParts[0]), Integer.parseInt(timeParts[1])));
+        return m;
+    }
+
+    public String toFileLine() {
+        String time = localtime == null ? "00:00" : String.format(Locale.getDefault(), "%02d:%02d", localtime.getHour(), localtime.getMinute());
+        return nume + "|" + nonStop + "|" + nrAngajati + "|" + tip + "|" + rating + "|" + areParcare + "|" + areLivrare + "|" + zona + "|" + time;
+    }
+
     @NonNull
     @Override
     public String toString() {

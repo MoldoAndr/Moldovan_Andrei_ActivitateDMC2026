@@ -28,4 +28,10 @@
     <string name="salveaza_market">Salveaza Market</string>
     <string name="lista_marketuri">Lista marketuri:</string>
     <string name="ora_inchiderii">Ora Inchiderii</string>
+    <string name="setari">Setari</string>
+    <string name="setari_text">Setari Text</string>
+    <string name="dimensiune_text">Dimensiune text (sp)</string>
+    <string name="culoare_text">Culoare text</string>
+    <string name="salveaza_setari">Salveaza Setari</string>
+    <string name="adaugat_la_favorite">Adaugat la favorite</string>
 </resources>

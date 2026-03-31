@@ -10,6 +10,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         ListView listViewMarkets = findViewById(R.id.listViewMarkets);
 
         listaMarketuri = new ArrayList<>();
+        incarcaMarketuriDinFisier();
         adapter = new MarketAdapter(this, listaMarketuri);
 
         listViewMarkets.setAdapter(adapter);
@@ -42,14 +49,20 @@ public class MainActivity extends AppCompatActivity {
         });
 
         listViewMarkets.setOnItemLongClickListener((parent, view, position, id) -> {
-            listaMarketuri.remove(position);
-            adapter.notifyDataSetChanged();
+            Market marketSelectat = listaMarketuri.get(position);
+            salveazaFavorit(marketSelectat);
             Toast.makeText(MainActivity.this,
-                    "Market sters",
+                    R.string.adaugat_la_favorite,
                     Toast.LENGTH_SHORT).show();
             return true;
         });
 
+
+        Button btnSetari = findViewById(R.id.btnSetari);
+        btnSetari.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
+        });
 
         btnAdaugaMarket.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, AddMarketActivity.class);
@@ -79,6 +92,33 @@ public class MainActivity extends AppCompatActivity {
                 actualizeazaMarket(listaMarketuri.get(position), market);
                 adapter.notifyDataSetChanged();
             }
+        }
+    }
+
+    private void incarcaMarketuriDinFisier() {
+        try (FileInputStream fis = openFileInput("markets.txt");
+             BufferedReader reader = new BufferedReader(new InputStreamReader(fis))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (!line.trim().isEmpty()) {
+                    Market m = Market.fromFileLine(line);
+                    if (m != null) {
+                        listaMarketuri.add(m);
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void salveazaFavorit(Market market) {
+        try (FileOutputStream fos = openFileOutput("favorite.txt", MODE_APPEND)) {
+            String line = market.toFileLine() + "\n";
+            fos.write(line.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

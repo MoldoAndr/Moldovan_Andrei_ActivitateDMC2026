@@ -1,6 +1,10 @@
 package labs.mta.laborator4;
 
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.TypedValue;
+
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.view.View;
@@ -11,12 +15,15 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.core.content.IntentCompat;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.time.LocalTime;
 
 public class AddMarketActivity extends AppCompatActivity {
@@ -72,6 +79,7 @@ public class AddMarketActivity extends AppCompatActivity {
         adapterRating.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRating.setAdapter(adapterRating);
         incarcaDatePentruEditare();
+        aplicaSetariText();
 
         btnSalveaza.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,11 +138,45 @@ public class AddMarketActivity extends AppCompatActivity {
         market.setZona(zona);
         market.setLocaltime(time);
 
+        if (marketPentruEditare == null) {
+            salveazaInFisier(market);
+        }
+
         Intent rezultat = new Intent();
         rezultat.putExtra(EXTRA_MARKET, market);
         rezultat.putExtra(EXTRA_POSITION, pozitieEditare);
         setResult(RESULT_OK, rezultat);
         finish();
+    }
+
+    private void salveazaInFisier(Market market) {
+        try (FileOutputStream fos = openFileOutput("markets.txt", MODE_APPEND)) {
+            String line = market.toFileLine() + "\n";
+            fos.write(line.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void aplicaSetariText() {
+        SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
+        float textSize = prefs.getFloat("text_size", 16f);
+        int textColor = prefs.getInt("text_color", Color.BLACK);
+
+        TextView[] labels = {
+                findViewById(R.id.tvFormTitle),
+                findViewById(R.id.tvNumeLabel),
+                findViewById(R.id.tvNrAngajatiLabel),
+                findViewById(R.id.tvZonaLabel),
+                findViewById(R.id.tvTipLabel),
+                findViewById(R.id.tvRatingLabel),
+                findViewById(R.id.tvOraLabel)
+        };
+
+        for (TextView tv : labels) {
+            tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+            tv.setTextColor(textColor);
+        }
     }
 
     private void incarcaDatePentruEditare() {
