@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Laborator8</string>
+    <string name="screen_title">Gestionare produse cu Room</string>
+    <string name="screen_subtitle">Adauga produse, filtreaza dupa nume sau interval si verifica imediat modificarile in lista.</string>
+    <string name="hint_product_name">Nume produs</string>
+    <string name="hint_product_category">Categorie</string>
+    <string name="hint_product_quantity">Stoc</string>
+    <string name="hint_search_name">Cautare dupa nume exact</string>
+    <string name="hint_min_quantity">Stoc minim</string>
+    <string name="hint_max_quantity">Stoc maxim</string>
+    <string name="hint_delete_threshold">Prag pentru stergere</string>
+    <string name="hint_initial_letter">Litera initiala</string>
+    <string name="button_add_product">Adauga produs</string>
+    <string name="button_show_all">Afiseaza toate</string>
+    <string name="button_search_by_name">Cauta</string>
+    <string name="button_filter_by_range">Interval</string>
+    <string name="button_delete_greater">Sterge &gt; prag</string>
+    <string name="button_delete_less">Sterge &lt; prag</string>
+    <string name="button_increment_by_letter">+1 pentru litera</string>
+    <string name="status_initial">Lista produse</string>
+    <string name="status_all_products">Toate inregistrarile</string>
+    <string name="status_exact_search">Rezultatul cautarii pentru "%1$s"</string>
+    <string name="status_range_search">Produse cu stoc intre %1$d si %2$d</string>
+    <string name="status_no_product_found">Nu exista produsul "%1$s"</string>
+    <string name="status_format">%1$s (%2$d rezultate)</string>
+    <string name="product_added">Produsul a fost adaugat.</string>
+    <string name="product_not_found">Nu s-a gasit niciun produs cu acest nume.</string>
+    <string name="invalid_range">Interval invalid. Valoarea minima trebuie sa fie mai mica sau egala cu maxima.</string>
+    <string name="deleted_greater_result">Au fost sterse %1$d produse cu stoc mai mare decat pragul.</string>
+    <string name="deleted_less_result">Au fost sterse %1$d produse cu stoc mai mic decat pragul.</string>
+    <string name="updated_result">Au fost actualizate %1$d produse.</string>
+    <string name="required_field">Camp obligatoriu</string>
+    <string name="required_number">Introdu o valoare numerica</string>
+    <string name="invalid_number">Valoare numerica invalida</string>
+</resources>
