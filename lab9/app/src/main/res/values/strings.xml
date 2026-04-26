@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">lab9</string>
+    <string name="deschide_lista_de_poze">Deschide lista de poze</string>
+    <string name="image_desc">Imagine descarcată</string>
+</resources>
