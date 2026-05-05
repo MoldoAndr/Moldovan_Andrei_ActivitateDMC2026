@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+// Laborator 3 - Cerinta 5: SecondActivity lansata la deschiderea aplicatiei (setata LAUNCHER in AndroidManifest)
 public class SecondActivity extends AppCompatActivity {
     private static final String TAG = "SecondActivity";
     private static final int REQ_THIRD = 1001;
@@ -30,9 +31,11 @@ public class SecondActivity extends AppCompatActivity {
         Log.i(TAG, "onCreate()");
 
         Button btn = findViewById(R.id.button);
+        // Laborator 3 - Cerinta 7: La apasarea butonului se deschide ThirdActivity printr-un Intent
         btn.setOnClickListener(v -> {
             Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
 
+            // Laborator 3 - Cerinta 8: Trimitere mesaj si doua valori int catre ThirdActivity prin Bundle
             Bundle b = new Bundle();
             b.putString("msg", "Salut din SecondActivity");
             b.putInt("x", 7);
@@ -43,14 +46,11 @@ public class SecondActivity extends AppCompatActivity {
         });
     }
 
+    // Laborator 3 - Cerinta 2: Implementare metode ale ciclului de viata
+    // Laborator 3 - Cerinta 3: Log-uri de tipuri diferite (Log.e/w/d/i/v)
+    // Laborator 3 - Cerinta 4: Filtrate in Logcat dupa TAG="SecondActivity"
     @Override
     protected void onStart() {
-        super.onStart();
-        logAll("onStart()");
-    }
-
-    @Override
-    protected void onResume() {
         super.onResume();
         logAll("onResume()");
     }
@@ -75,6 +75,7 @@ public class SecondActivity extends AppCompatActivity {
         Log.v(TAG, method + " -> Log.v");
     }
 
+    // Laborator 3 - Cerinta 11: Afisare mesaj primit si suma calculata printr-un Toast
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

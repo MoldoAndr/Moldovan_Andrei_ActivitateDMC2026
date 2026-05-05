@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+// Laborator 4 - Cerinta 1: Activitate principala setata ca activitate implicita (LAUNCHER) in AndroidManifest
 public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_ADD_MARKET = 100;
@@ -35,11 +36,15 @@ public class MainActivity extends AppCompatActivity {
         ListView listViewMarkets = findViewById(R.id.listViewMarkets);
 
         listaMarketuri = new ArrayList<>();
+        // Laborator 7 - Cerinta 2: Incarcare obiecte din fisier markets.txt la pornirea aplicatiei
         incarcaMarketuriDinFisier();
+        // Laborator 5 - Cerinta 5: ListView afisat cu MarketAdapter (ArrayAdapter personalizat)
         adapter = new MarketAdapter(this, listaMarketuri);
 
         listViewMarkets.setAdapter(adapter);
 
+        // Laborator 6 - Cerinta 3: ItemClick deschide activitatea de editare cu campurile pre-completate
+        // Nota: In Lab5 - Cerinta 6, ItemClick afisa obiectul printr-un Toast; a evoluat la Lab6 catre editare
         listViewMarkets.setOnItemClickListener((parent, view, position, id) -> {
             Market marketSelectat = listaMarketuri.get(position);
             Intent intent = new Intent(MainActivity.this, AddMarketActivity.class);
@@ -48,9 +53,13 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(intent, REQUEST_CODE_EDIT_MARKET);
         });
 
+        // Laborator 7 - Cerinta 3: LongItemClick salveaza obiectul selectat in fisierul favorite.txt
+        // Nota: In Lab5 - Cerinta 7, LongItemClick sterge obiectul din lista; a evoluat la Lab7 catre salvare in favorite
         listViewMarkets.setOnItemLongClickListener((parent, view, position, id) -> {
             Market marketSelectat = listaMarketuri.get(position);
             salveazaFavorit(marketSelectat);
+            // REMOVE: listaMarketuri.remove(position);
+            // REMOVE: adapter.notifyDataSetChanged();
             Toast.makeText(MainActivity.this,
                     R.string.adaugat_la_favorite,
                     Toast.LENGTH_SHORT).show();
@@ -64,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        // Laborator 4 - Cerinta 3: Buton de adaugare care deschide activitatea de introducere date prin Intent
         btnAdaugaMarket.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, AddMarketActivity.class);
             startActivityForResult(intent, REQUEST_CODE_ADD_MARKET);
@@ -84,9 +94,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (requestCode == REQUEST_CODE_ADD_MARKET) {
+            // Laborator 5 - Cerinta 3: Obiectul returnat este adaugat in lista
             listaMarketuri.add(market);
             adapter.notifyDataSetChanged();
         } else if (requestCode == REQUEST_CODE_EDIT_MARKET) {
+            // Laborator 6 - Cerinta 3: Obiectul selectat este actualizat in lista (nu adaugat)
             int position = data.getIntExtra(AddMarketActivity.EXTRA_POSITION, -1);
             if (position >= 0 && position < listaMarketuri.size()) {
                 actualizeazaMarket(listaMarketuri.get(position), market);
@@ -113,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Laborator 7 - Cerinta 3: Salvare obiect favorit in fisierul separat favorite.txt
     private void salveazaFavorit(Market market) {
         try (FileOutputStream fos = openFileOutput("favorite.txt", MODE_APPEND)) {
             String line = market.toFileLine() + "\n";

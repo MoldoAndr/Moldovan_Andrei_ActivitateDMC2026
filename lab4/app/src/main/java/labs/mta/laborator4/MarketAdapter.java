@@ -14,6 +14,7 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Locale;
 
+// Laborator 6 - Cerinta 2: Adapter personalizat care extinde ArrayAdapter<Market> pentru afisarea obiectelor in ListView
 public class MarketAdapter extends ArrayAdapter<Market> {
 
     public MarketAdapter(@NonNull Context context, @NonNull List<Market> markets) {
@@ -22,7 +23,9 @@ public class MarketAdapter extends ArrayAdapter<Market> {
 
     @NonNull
     @Override
+    // Laborator 6 - Cerinta 2: Mod personalizat de prezentare a fiecarui obiect Market in ListView
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        // Laborator 6 - Cerinta 2: ViewHolder pattern pentru performanta la scroll
         ViewHolder viewHolder;
 
         if (convertView == null) {

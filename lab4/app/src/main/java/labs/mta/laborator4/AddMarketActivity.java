@@ -26,11 +26,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalTime;
 
+// Laborator 4 - Cerinta 3: Activitate pentru preluarea datelor unui Market (folosita si pentru editare - Lab 6)
 public class AddMarketActivity extends AppCompatActivity {
 
     public static final String EXTRA_MARKET = "market";
     public static final String EXTRA_POSITION = "position";
 
+    // Laborator 4 - Cerinta 3: View-uri pentru preluarea datelor - TextView, EditText, CheckBox, RadioButton, Spinner, Switch, ToggleButton, TimePicker
+    // Nota: RatingBar inlocuit cu Spinner pentru selectia rating-ului (1-5)
     private EditText etNume;
     private EditText etNrAngajati;
     private TimePicker etTime;
@@ -78,7 +81,9 @@ public class AddMarketActivity extends AppCompatActivity {
         );
         adapterRating.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRating.setAdapter(adapterRating);
+        // Laborator 6 - Cerinta 3: Pre-completare campuri cu datele obiectului selectat (daca este editare)
         incarcaDatePentruEditare();
+        // Laborator 7 - Cerinta 4: Aplica setarile salvate din SharedPreferences (dimensiune si culoare text)
         aplicaSetariText();
 
         btnSalveaza.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +94,8 @@ public class AddMarketActivity extends AppCompatActivity {
         });
     }
 
+    // Laborator 4 - Cerintele 4, 5: Creare instanta Market din datele introduse de utilizator
+    // Laborator 5 - Cerinta 3: Instanta creata este returnata catre MainActivity prin Intent cu Bundle/Parcelable
     private void salveazaMarket() {
         String nume = etNume.getText().toString().trim();
         String nrAngajatiText = etNrAngajati.getText().toString().trim();
@@ -139,9 +146,11 @@ public class AddMarketActivity extends AppCompatActivity {
         market.setLocaltime(time);
 
         if (marketPentruEditare == null) {
+            // Laborator 7 - Cerinta 2: La adaugare obiect nou, acesta este salvat in fisierul markets.txt
             salveazaInFisier(market);
         }
 
+        // Laborator 4 - Cerinta 4 / Laborator 6 - Cerinta 4: Obiectul este trimis inapoi prin Parcelable
         Intent rezultat = new Intent();
         rezultat.putExtra(EXTRA_MARKET, market);
         rezultat.putExtra(EXTRA_POSITION, pozitieEditare);
@@ -149,6 +158,7 @@ public class AddMarketActivity extends AppCompatActivity {
         finish();
     }
 
+    // Laborator 7 - Cerinta 2: Scriere obiect nou in fisierul markets.txt in modul APPEND (adaugare la sfarsit)
     private void salveazaInFisier(Market market) {
         try (FileOutputStream fos = openFileOutput("markets.txt", MODE_APPEND)) {
             String line = market.toFileLine() + "\n";
@@ -158,6 +168,7 @@ public class AddMarketActivity extends AppCompatActivity {
         }
     }
 
+    // Laborator 7 - Cerinta 4: Citire setari din SharedPreferences si aplicare dimensiune + culoare la label-urile TextView
     private void aplicaSetariText() {
         SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
         float textSize = prefs.getFloat("text_size", 16f);
@@ -179,6 +190,7 @@ public class AddMarketActivity extends AppCompatActivity {
         }
     }
 
+    // Laborator 6 - Cerinta 3: Incarcare date din obiectul primit la editare si pre-completare a tuturor campurilor formularului
     private void incarcaDatePentruEditare() {
         pozitieEditare = getIntent().getIntExtra(EXTRA_POSITION, -1);
         marketPentruEditare = IntentCompat.getParcelableExtra(getIntent(), EXTRA_MARKET, Market.class);

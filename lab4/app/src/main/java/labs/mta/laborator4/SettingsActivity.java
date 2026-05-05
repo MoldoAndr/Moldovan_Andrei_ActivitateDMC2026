@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+// Laborator 7 - Cerinta 4: Activitate de setari - utilizatorul isi seteaza dimensiunea si culoarea textelor
 public class SettingsActivity extends AppCompatActivity {
 
     private EditText etTextSize;
@@ -40,6 +41,7 @@ public class SettingsActivity extends AppCompatActivity {
         btnSalveazaSetari.setOnClickListener(view -> salveazaSetari());
     }
 
+    // Laborator 7 - Cerinta 4: Citire setari anterioare din SharedPreferences pentru afisare in formularul de setari
     private void incarcaSetari() {
         SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
         float textSize = prefs.getFloat("text_size", 16f);
@@ -55,6 +57,8 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    // Laborator 7 - Cerinta 4: Salvare setari (dimensiune text + culoare text) in SharedPreferences "settings"
+    // Aceste setari sunt folosite in AddMarketActivity la viitoarele utilizari ale aplicatiei
     private void salveazaSetari() {
         String sizeText = etTextSize.getText().toString().trim();
         if (sizeText.isEmpty()) {

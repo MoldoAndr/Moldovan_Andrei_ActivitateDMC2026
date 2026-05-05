@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+// Laborator 3 - Cerinta 6: A treia activitate adaugata in proiect
 public class ThirdActivity extends AppCompatActivity {
 
     private static final String TAG = "ThirdActivity";
@@ -32,6 +33,7 @@ public class ThirdActivity extends AppCompatActivity {
 
         Log.i(TAG, "onCreate()");
 
+        // Laborator 3 - Cerinta 9: Preluare date trimise prin Bundle din SecondActivity si afisare prin Toast
         Bundle extras = getIntent().getExtras();
         String msg = "default";
 
@@ -42,6 +44,7 @@ public class ThirdActivity extends AppCompatActivity {
         }
         Toast.makeText(this, msg + " | x=" + x + " y=" + y, Toast.LENGTH_LONG).show();
         Button btnBack = findViewById(R.id.button_back);
+        // Laborator 3 - Cerinta 10: Buton care trimite inapoi un mesaj si suma celor doua valori primite
         btnBack.setOnClickListener(v -> {
             int sum = x + y;
 
@@ -54,6 +57,9 @@ public class ThirdActivity extends AppCompatActivity {
         });
     }
 
+    // Laborator 3 - Cerinta 2: Implementare metode ale ciclului de viata
+    // Laborator 3 - Cerinta 3: Log-uri de tipuri diferite (Log.e/w/d/i/v)
+    // Laborator 3 - Cerinta 4: Filtrate in Logcat dupa TAG="ThirdActivity"
     @Override protected void onStart()  { super.onStart();  logAll("onStart()"); }
     @Override protected void onResume() { super.onResume(); logAll("onResume()"); }
     @Override protected void onPause()  { logAll("onPause()"); super.onPause(); }

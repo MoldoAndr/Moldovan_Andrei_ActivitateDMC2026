@@ -1,3 +1,5 @@
+<!-- Laborator 2 - Cerinta 7: Texte pentru toate cele 3 view-uri definite in fisierul de resurse -->
+<!-- Laborator 2 - Cerinta 9: Internationalizare - limba romana (configuratie default) -->
 <resources>
     <string name="app_name">Lab2</string>
     <string name="btn_text">Schimba Textul</string>

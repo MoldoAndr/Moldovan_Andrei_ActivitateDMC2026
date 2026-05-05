@@ -11,12 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Laborator4">
+        <!-- Laborator 7 - Cerinta 4: Activitate de setari pentru dimensiunea si culoarea textelor (salvate in SharedPreferences) -->
         <activity
             android:name=".SettingsActivity"
             android:exported="false" />
+        <!-- Laborator 4 - Cerinta 3: Activitate pentru introducerea si editarea datelor unui Market -->
         <activity
             android:name=".AddMarketActivity"
             android:exported="false" />
+        <!-- Laborator 4 - Cerinta 1: MainActivity setata ca activitate implicita (LAUNCHER) -->
         <activity
             android:name=".MainActivity"
             android:exported="true">

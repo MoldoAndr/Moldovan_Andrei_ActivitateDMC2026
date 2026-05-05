@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Lab10</string>
+    <string name="codul_orasului_va_aparea_aici">Codul orasului va aparea aici</string>
+    <string name="cauta_cod_oras">Cauta Cod Oras</string>
+    <string name="introduceti_numele_orasului">Introduceti numele orasului</string>
+    <string name="cauta_vreme">Cauta Vreme</string>
+    <string name="rezultatele_vor_aparea_aici">Rezultatele vor aparea aici</string>
+</resources>

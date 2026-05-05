@@ -8,15 +8,23 @@ import androidx.annotation.NonNull;
 import java.time.LocalTime;
 import java.util.Locale;
 
+// Laborator 4 - Cerinta 2: Clasa Market (initiale M+A), reprezentand un market real
+// Contine minim 5 atribute de tipuri diferite: String, boolean, int, enum (TipMarket), float
 public class Market implements Parcelable {
+    // Laborator 4 - Cerinta 2: Atribut String
     private String nume;
+    // Laborator 4 - Cerinta 2: Atribut boolean
     private boolean nonStop;
+    // Laborator 4 - Cerinta 2: Atribut int
     private int nrAngajati;
+    // Laborator 4 - Cerinta 2: Atribut enum (multime finita de valori)
     private TipMarket tip;
+    // Laborator 4 - Cerinta 2: Atribut float
     private float rating;
     private boolean areParcare;
     private boolean areLivrare;
     private String zona;
+    // Laborator 5 - Cerinta 2: Atribut de tip LocalTime adaugat
     private LocalTime localtime;
 
     public Market() {
@@ -35,6 +43,7 @@ public class Market implements Parcelable {
         this.localtime = local_time;
     }
 
+    // Laborator 6 - Cerinta 4: Constructor Parcelable - citire date din Parcel pentru transfer intre activitati
     protected Market(Parcel in) {
         nume = in.readString();
         nonStop = in.readByte() != 0;
@@ -139,6 +148,7 @@ public class Market implements Parcelable {
         return 0;
     }
 
+    // Laborator 6 - Cerinta 4: Scriere date in Parcel pentru transfer intre activitati
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(nume);
@@ -153,6 +163,7 @@ public class Market implements Parcelable {
         dest.writeInt(localtime == null ? 0 : localtime.getMinute());
     }
 
+    // Laborator 7 - Cerintele 2, 3: Deserializare din linie fisier (pipe-delimited) pentru incarcare din markets.txt / favorite.txt
     public static Market fromFileLine(String line) {
         String[] parts = line.split("\\|");
         if (parts.length < 9) return null;
@@ -170,11 +181,13 @@ public class Market implements Parcelable {
         return m;
     }
 
+    // Laborator 7 - Cerintele 2, 3: Serializare in linie fisier (pipe-delimited) pentru salvare in markets.txt / favorite.txt
     public String toFileLine() {
         String time = localtime == null ? "00:00" : String.format(Locale.getDefault(), "%02d:%02d", localtime.getHour(), localtime.getMinute());
         return nume + "|" + nonStop + "|" + nrAngajati + "|" + tip + "|" + rating + "|" + areParcare + "|" + areLivrare + "|" + zona + "|" + time;
     }
 
+    // Laborator 5 - Cerinta 5: Metoda toString() pentru afisarea obiectului in ListView
     @NonNull
     @Override
     public String toString() {

@@ -125,16 +125,11 @@ public class PhotosActivity extends AppCompatActivity {
             if (connection != null) { connection.disconnect(); }
         }
 
-        // Step 1: decode bounds only
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
-
-        // Step 2: calculate inSampleSize
         options.inSampleSize = calculateInSampleSize(options, TARGET_WIDTH, TARGET_HEIGHT);
         options.inJustDecodeBounds = false;
-
-        // Step 3: decode actual bitmap with downsampling
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
     }
 
