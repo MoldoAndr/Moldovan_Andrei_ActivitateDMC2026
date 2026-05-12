@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">laborator11</string>
+    <string name="_2d_chart">2D Chart</string>
+    <string name="enter_a_value">Enter a value</string>
+    <string name="add_value">Add Value</string>
+    <string name="values">Values:</string>
+    <string name="show_chart">Show Chart</string>
+</resources>
