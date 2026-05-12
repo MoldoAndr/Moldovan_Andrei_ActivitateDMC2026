@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lab11">
         <activity
+            android:name=".ColumnChart"
+            android:exported="false" />
+        <activity
             android:name=".ActivitateCharts"
             android:exported="false" />
         <activity

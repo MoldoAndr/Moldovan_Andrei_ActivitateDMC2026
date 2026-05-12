@@ -2,8 +2,10 @@ package labs.mta.lab11;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,8 +20,11 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Float> values = new ArrayList<>();
+    private final String[] spTypes = {"PieChart", "ColumnChart", "BarChart"};
     private EditText etValue;
     private TextView tvValues;
+
+    private Spinner spTipChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +39,17 @@ public class MainActivity extends AppCompatActivity {
 
         etValue = findViewById(R.id.etValue);
         tvValues = findViewById(R.id.tvValues);
+        spTipChart = findViewById(R.id.Spinner);
+        ArrayAdapter<String> adapterTipChart = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                spTypes
+        );
+        adapterTipChart.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spTipChart.setAdapter(adapterTipChart);
         Button btnAdd = findViewById(R.id.btnAdd);
         Button btnShowChart = findViewById(R.id.btnShowChart);
+        Button btnClear = findViewById(R.id.btnClear);
 
         btnAdd.setOnClickListener(v -> {
             if (values.size() >= 10) {
@@ -69,8 +83,15 @@ public class MainActivity extends AppCompatActivity {
             }
             Bundle bundle = new Bundle();
             bundle.putFloatArray("values", valuesArray);
+            bundle.putString("chartType", spTipChart.getSelectedItem().toString());
             intent.putExtras(bundle);
             startActivity(intent);
+        });
+
+        btnClear.setOnClickListener(v -> {
+            values.clear();
+            updateValuesText();
+            etValue.setText("");
         });
     }
 

@@ -5,4 +5,8 @@
     <string name="add_value">Add Value</string>
     <string name="values">Values:</string>
     <string name="show_chart">Show Chart</string>
+    <string name="clear_values">Clear Values</string>
+    <string name="piechart">PieChart</string>
+    <string name="column_chart">Column Chart</string>
+    <string name="bar_chart">Bar Chart</string>
 </resources>

@@ -11,15 +11,15 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/_2d_chart"
+        android:text="@string/piechart"
         android:textSize="24sp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="16dp" />
 
-    <labs.mta.lab11.ChartView
-        android:id="@+id/chartView"
-        android:layout_width="wrap_content"
-        android:layout_height="500dp"
+    <labs.mta.lab11.PieChart
+        android:id="@+id/pieChart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1" />
 
 </LinearLayout>
